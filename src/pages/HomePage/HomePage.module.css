@@ -5,4 +5,45 @@
   height: 696px;
   background-repeat: no-repeat;
   background-position: center;
+  position: relative;
+}
+
+.blockWrapper {
+  position: absolute;
+  top: 260px;
+  left: 64px;
+  display: flex;
+  flex-direction: column;
+  width: 571px;
+}
+
+.title {
+  font-size: 48px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: #f7f7f7;
+  margin-bottom: 16px;
+  text-align: start;
+}
+
+.text {
+  font-size: 24px;
+  line-height: 0.75;
+  font-weight: 600;
+  color: #f7f7f7;
+  margin-bottom: 40px;
+  padding-right: 21px;
+  text-align: left;
+}
+
+.link {
+  display: inline-block;
+  color: #ffffff;
+  width: 173px;
+  padding: 16px 47px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 0.66;
+  background-color: #e44848;
+  border-radius: 200px;
 }
