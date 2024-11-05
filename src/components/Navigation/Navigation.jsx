@@ -9,7 +9,7 @@ const buildLinkClass = ({ isActive }) => {
 
 const Navigation = () => {
   return (
-    <div>
+    <div className={css.container}>
       <div className={css.iconContainer}>
         <Icon
           src="/icon-logo.svg"

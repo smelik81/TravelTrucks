@@ -20,7 +20,7 @@ const NotFoundPage = lazy(() =>
 function App() {
   return (
     <div>
-      <header>
+      <header className="header">
         <Navigation />
       </header>
       <Suspense fallback={<Loader />}>
