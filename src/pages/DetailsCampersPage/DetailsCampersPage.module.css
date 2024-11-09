@@ -1,0 +1,27 @@
+.detailsPageContainer {
+  padding: 48px 64px 80px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.locationWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.camperDetailName,
+.camperDetailPrice {
+  font-size: 24px;
+  line-height: 1.33;
+  font-weight: 600;
+  color: #101828;
+}
+
+.ratingInfo {
+}

@@ -19,19 +19,20 @@ const NotFoundPage = lazy(() =>
 
 function App() {
   return (
-    <div>
-      <header className="header">
-        <Navigation />
-      </header>
-      <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader />}>
+      <div>
+        <header className="header">
+          <Navigation />
+        </header>
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:id" element={<DetailsCampersPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </Suspense>
-    </div>
+      </div>
+    </Suspense>
   );
 }
 

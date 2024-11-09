@@ -1,6 +1,7 @@
 .header {
   display: flex;
   width: 1440px;
+  background-color: #f7f7f7;
 }
 
 /* #root {

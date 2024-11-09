@@ -10,6 +10,7 @@ import {
 
 import CatalogPageLoader from "../../components/CatalogPageLoader/CatalogPageLoader.jsx";
 import CatalogTrailerCard from "../../components/CatalogTrailerCard/CatalogTrailerCard.jsx";
+import FilterSideBar from "../../components/FilterSideBar/FilterSideBar.jsx";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
@@ -19,21 +20,28 @@ const CatalogPage = () => {
 
   const [showTrailerCard, setShowTrailerCard] = useState(4);
 
+  /*  useEffect(() => {
+    startTransition(() => {
+      setShowTrailerCard(4);
+      dispatch(fetchCampers());
+    });
+  }, [dispatch]); */
+
   useEffect(() => {
     setShowTrailerCard(4);
     dispatch(fetchCampers());
   }, [dispatch]);
 
-  /* useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchCampers(filters));
-    }
-  }, [dispatch, status, filters]); */
+  const handleLoadMore = () => {
+    setShowTrailerCard((prevCard) => prevCard + 4);
+  };
 
   return (
-    <div>
-      <h2>Campers:</h2>
-      <div>
+    <div className={css.mainContainer}>
+      <div className={css.filterContainer}>
+        <FilterSideBar />
+      </div>
+      <div className={css.pageContainer}>
         {status === "loading" && <CatalogPageLoader />}
         {status === "succeeded" &&
           campers
@@ -41,6 +49,11 @@ const CatalogPage = () => {
             .map((camper) => (
               <CatalogTrailerCard key={camper.id} camper={camper} />
             ))}
+        {showTrailerCard < campers.length && (
+          <button className={css.loadMoreBtn} onClick={handleLoadMore}>
+            Load More
+          </button>
+        )}
       </div>
     </div>
   );

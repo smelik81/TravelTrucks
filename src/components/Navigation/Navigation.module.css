@@ -1,11 +1,11 @@
 .container {
   display: flex;
-  background-color: #ffffff;
   border-bottom: 1px;
   padding: 24px 64px;
   gap: 450px;
   align-items: center;
   width: 1440px;
+  /* background-color: #ffffff; */
 }
 
 .nav {

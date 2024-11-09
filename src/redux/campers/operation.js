@@ -7,7 +7,7 @@ export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
   async (filters, thunkAPI) => {
     try {
-      /* const filteredParams = Object.entries(filters).reduce(
+      /*  const filteredParams = Object.entries(filters).reduce(
         (acc, [key, value]) => {
           if (value !== false) {
             acc[key] = value;
@@ -21,10 +21,25 @@ export const fetchCampers = createAsyncThunk(
       const result = await axios.get(BASE_URL, {
         params: filteredParams,
       }); */
-      const result = await axios.get(BASE_URL);
-      return result.data.items;
+      const response = await axios.get(BASE_URL);
+      return response.data.items;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchCampersDetails = createAsyncThunk(
+  "campers/fetchCamperDetails",
+  async (id, { rejectWithValue }) => {
+    console.log("Запит виконується з id:", id);
+    try {
+      const response = await axios.get(`${BASE_URL}/${id}`);
+      console.log("Response data:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Помилка під час запиту:", error);
+      return rejectWithValue(error.message);
     }
   }
 );
