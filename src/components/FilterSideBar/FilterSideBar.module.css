@@ -99,6 +99,12 @@
   line-height: 1.5;
   color: #101828;
 }
+.category:hover,
+.category:focus {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+  border-color: #e44848;
+}
 
 span {
   text-align: center;

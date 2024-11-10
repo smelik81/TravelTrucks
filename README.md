@@ -8,6 +8,16 @@ TravelTrucks is a frontend application developed for the company **TravelTrucks*
 - **Catalog Page**: A list of all available campers with filtering options.
 - **Camper Details Page**: Detailed information about each camper, including reviews and a booking form.
 
+## Technologies Used
+
+- **React**: Used for building the user interface.
+- **Redux**: For state management.
+- **Formik + Yup**: For form handling and validation.
+- **React Router**: For routing between pages.
+- **CSS Modules**: For styling.
+- **React Hot Toast**: For notifications.
+- **MockAPI**: Backend API to fetch camper data.
+
 ## API
 
 This project uses the following API for camper data:
