@@ -1,0 +1,44 @@
+.formTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bookingForm {
+  width: 641px;
+  border: 1px solid #dadde1;
+  border-radius: 10px;
+  padding: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #101828;
+}
+.description {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #6c717b;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+.input {
+  padding: 18px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}

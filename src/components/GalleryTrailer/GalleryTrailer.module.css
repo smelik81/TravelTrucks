@@ -1,0 +1,13 @@
+.containerImages {
+  max-width: 1312px;
+  width: 100%;
+  display: flex;
+  gap: 48px;
+}
+
+.image {
+  width: 292px;
+  height: 312px;
+  border-radius: 10px;
+  object-fit: cover;
+}

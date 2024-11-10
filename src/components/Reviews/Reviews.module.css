@@ -1,0 +1,40 @@
+.reviewsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  width: 631px;
+}
+
+.reviewsText {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #475467;
+}
+
+.reviewsWrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.reviewsAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #f2f4f7;
+  border-radius: 60px;
+  color: #e44848;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.33;
+}
+
+.reviewsName {
+  font-size: 16px;
+  color: #101828;
+  line-height: 1.5;
+  font-weight: 500;
+}

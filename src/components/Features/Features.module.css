@@ -1,0 +1,53 @@
+.featureContainer {
+  width: 631px;
+  padding: 44px 52px;
+  background-color: #f7f7f7;
+  border: 1px solid gray;
+  border-radius: 10px;
+  gap: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.featureList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.featureItem {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #101828;
+  gap: 5px;
+  display: flex;
+  border-radius: 100px;
+  background-color: #f2f4f7;
+  padding: 12px 18px;
+}
+
+.title {
+  font-size: 20px;
+  line-height: 1.2;
+  color: #101828;
+  font-weight: 600;
+}
+.hrLine {
+  margin-bottom: 24px;
+  margin-top: 24px;
+}
+
+.formList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.formList > li {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #101828;
+}

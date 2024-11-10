@@ -8,7 +8,12 @@ import {
   selectCampersDetails,
   selectCampersDetailsStatus,
 } from "../../redux/campers/selectors";
+import Icon from "../../../public/Icon/Icon.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
+import GalleryTrailer from "../../components/GalleryTrailer/GalleryTrailer.jsx";
+import Features from "../../components/Features/Features.jsx";
+import Reviews from "../../components/Reviews/Reviews.jsx";
+import BookForm from "../../components/BookForm/BookForm.jsx";
 
 const DetailsCampersPage = () => {
   const { id } = useParams();
@@ -17,12 +22,10 @@ const DetailsCampersPage = () => {
   const camperDetail = useSelector(selectCampersDetails);
 
   const status = useSelector(selectCampersDetailsStatus);
-  const [activeTab, setActiveTab] = useState("features");
+  const [activeChoice, setActiveChoice] = useState("features");
 
   useEffect(() => {
-    console.log("Перед dispatch");
     dispatch(fetchCampersDetails(id));
-    console.log("Після dispatch");
   }, [dispatch, id]);
 
   if (status === "loading") {
@@ -41,18 +44,60 @@ const DetailsCampersPage = () => {
         </h2>
         <div className={css.wrapper}>
           <div className={css.ratingInfo}>
-            <span>Z</span>
-            {camperDetail?.rating || 0} ({camperDetail?.reviews?.length || 0}{" "}
-            Reviews)
+            <Icon name="icon-star-like" width={16} height={16} fill="#FFC531" />
+            <span>
+              {camperDetail?.rating || 0} ({camperDetail?.reviews?.length || 0}{" "}
+              Reviews)
+            </span>
           </div>
-          <div className={css.locationWrapper}>
-            <span>W</span>
+          <div className={css.locationInfo}>
+            <Icon name="icon-location" width={16} height={16} fill="#101828" />
             {/*  <LocationFormatter location={camper.location} /> */}
             <p>{camperDetail?.location || "No location"}</p>
           </div>
         </div>
-
         <p className={css.camperDetailPrice}>€{camperDetail.price}</p>
+      </div>
+      <div className={css.galleryContainer}>
+        <div className={css.galleryWrapper}>
+          {camperDetail.gallery && (
+            <GalleryTrailer images={camperDetail.gallery} />
+          )}
+        </div>
+        <p className={css.description}>{camperDetail.description}</p>
+      </div>
+      <div className={css.choiceContainer}>
+        <div className={css.choiceWrapper}>
+          <button
+            className={activeChoice === "features" ? css.activeChoice : ""}
+            onClick={() => setActiveChoice("features")}
+          >
+            Features
+          </button>
+          <button
+            className={activeChoice === "reviews" ? css.activeChoice : ""}
+            onClick={() => setActiveChoice("reviews")}
+          >
+            Reviews
+          </button>
+        </div>
+      </div>
+      <div className={css.contentContainer}>
+        <div
+          className={
+            activeChoice === "features"
+              ? css.backgroundActive
+              : css.backgroundNoActive
+          }
+        >
+          {activeChoice === "features" && <Features features={camperDetail} />}
+          {activeChoice === "reviews" && (
+            <Reviews reviews={camperDetail.reviews} />
+          )}
+        </div>
+        <div className={css.bookingForm}>
+          <BookForm camperId={id} />
+        </div>
       </div>
     </div>
   );

@@ -53,12 +53,8 @@ const campersSlice = createSlice({
         state.camperDetailsStatus = "loading";
       })
       .addCase(fetchCampersDetails.fulfilled, (state, action) => {
-        console.log("before");
-
         state.camperDetailsStatus = "succeeded";
         state.camperDetails = action.payload;
-        console.log("after");
-        console.log(action.payload);
       })
       .addCase(fetchCampersDetails.rejected, (state) => {
         state.camperDetailsStatus = "failed";

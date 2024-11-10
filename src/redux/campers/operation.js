@@ -32,7 +32,6 @@ export const fetchCampers = createAsyncThunk(
 export const fetchCampersDetails = createAsyncThunk(
   "campers/fetchCamperDetails",
   async (id, { rejectWithValue }) => {
-    console.log("Запит виконується з id:", id);
     try {
       const response = await axios.get(`${BASE_URL}/${id}`);
       console.log("Response data:", response.data);
