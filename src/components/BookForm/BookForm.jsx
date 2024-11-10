@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -15,10 +17,7 @@ const validationSchema = Yup.object({
     .required("Name is required"),
 
   email: Yup.string()
-    .matches(
-      /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
-      "Email should contain only latin characters and end with @gmail.com"
-    )
+    .email("Invalid email format")
     .required("Email is required"),
 
   date: Yup.string().required("Booking date is required"),
@@ -41,7 +40,7 @@ const handleSubmit = (values, { resetForm }) => {
 };
 
 const BookForm = () => {
-  const [date, setDate] = useState(null);
+  const [choiceDate, setChoiceDate] = useState(null);
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} />
@@ -87,15 +86,15 @@ const BookForm = () => {
                 />
               </div>
 
-              {/*  <div className={css.inputField}>
+              <div className={css.inputField}>
                 <DatePicker
-                  selected={startDate}
+                  selected={choiceDate}
                   onChange={(date) => {
-                    setStartDate(date);
+                    setChoiceDate(date);
                     setFieldValue("date", date);
                   }}
                   placeholderText="Booking date*"
-                  className={css.input}
+                  className={css.inputDate}
                   dateFormat="dd/MM/yyyy"
                   minDate={new Date()}
                 />
@@ -104,7 +103,7 @@ const BookForm = () => {
                   component="div"
                   className={css.error}
                 />
-              </div> */}
+              </div>
 
               <div className={css.inputField}>
                 <Field

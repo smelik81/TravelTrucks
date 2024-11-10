@@ -47,3 +47,10 @@
   background-color: #e44848;
   border-radius: 200px;
 }
+
+.link:hover,
+.link:focus {
+  background-color: #d84343;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}

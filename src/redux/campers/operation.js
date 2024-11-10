@@ -5,7 +5,7 @@ const BASE_URL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers";
 
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
-  async (filters, thunkAPI) => {
+  async (filters = {}, thunkAPI) => {
     try {
       /*  const filteredParams = Object.entries(filters).reduce(
         (acc, [key, value]) => {
@@ -21,7 +21,9 @@ export const fetchCampers = createAsyncThunk(
       const result = await axios.get(BASE_URL, {
         params: filteredParams,
       }); */
-      const response = await axios.get(BASE_URL);
+      const response = await axios.get(BASE_URL, {
+        params: filters,
+      });
       return response.data.items;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -34,7 +36,6 @@ export const fetchCampersDetails = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${BASE_URL}/${id}`);
-      console.log("Response data:", response.data);
       return response.data;
     } catch (error) {
       console.error("Помилка під час запиту:", error);

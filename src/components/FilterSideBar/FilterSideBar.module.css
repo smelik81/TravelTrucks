@@ -33,14 +33,15 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
-  margin-bottom: 32px;
 }
 
-.filterCategoryWrapper {
+.filterCategoryWrapper,
+.categoryWrapper {
   display: flex;
   flex-direction: column;
   gap: 24px;
   width: 360px;
+  margin-top: 32px;
 }
 
 .sectionTitle {
@@ -67,4 +68,38 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
+  margin-top: 40px;
+}
+.searchBtn:hover,
+.searchBtn:focus {
+  background-color: #d84343;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.categoryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 360px;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #dadde1;
+  border-radius: 12px;
+  width: 112px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #101828;
+}
+
+span {
+  text-align: center;
 }

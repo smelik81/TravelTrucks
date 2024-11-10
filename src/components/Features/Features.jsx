@@ -16,7 +16,6 @@ const Features = ({ features }) => {
     "bathroom",
     "engine",
     "radio",
-    "refrigerator",
     "water",
   ];
 

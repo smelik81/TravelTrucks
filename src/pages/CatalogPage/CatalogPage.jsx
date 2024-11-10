@@ -7,7 +7,7 @@ import {
   selectCampersStatus,
   selectFilters,
 } from "../../redux/campers/selectors.js";
-
+import { setFilters } from "../../redux/campers/slice.js";
 import CatalogPageLoader from "../../components/CatalogPageLoader/CatalogPageLoader.jsx";
 import CatalogTrailerCard from "../../components/CatalogTrailerCard/CatalogTrailerCard.jsx";
 import FilterSideBar from "../../components/FilterSideBar/FilterSideBar.jsx";
@@ -20,17 +20,14 @@ const CatalogPage = () => {
 
   const [showTrailerCard, setShowTrailerCard] = useState(4);
 
-  /*  useEffect(() => {
-    startTransition(() => {
-      setShowTrailerCard(4);
-      dispatch(fetchCampers());
-    });
-  }, [dispatch]); */
-
   useEffect(() => {
     setShowTrailerCard(4);
-    dispatch(fetchCampers());
-  }, [dispatch]);
+    dispatch(fetchCampers(filters));
+  }, [dispatch, filters]);
+
+  const handleFilterChange = (newFilters) => {
+    dispatch(setFilters(newFilters));
+  };
 
   const handleLoadMore = () => {
     setShowTrailerCard((prevCard) => prevCard + 4);
@@ -39,7 +36,12 @@ const CatalogPage = () => {
   return (
     <div className={css.mainContainer}>
       <div className={css.filterContainer}>
-        <FilterSideBar />
+        <FilterSideBar
+          filters={filters}
+          setFilters={handleFilterChange}
+          onFilterChange={handleFilterChange}
+          onSearchClick={() => setIsSearchClicked(true)}
+        />
       </div>
       <div className={css.pageContainer}>
         {status === "loading" && <CatalogPageLoader />}

@@ -26,3 +26,8 @@
   background-color: transparent;
   border: 1px solid #dadde1;
 }
+
+.loadMoreBtn:hover {
+  border-color: #d84343;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

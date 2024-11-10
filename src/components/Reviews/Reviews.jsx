@@ -8,7 +8,7 @@ const Reviews = ({ reviews }) => {
 
   const ratingStar = (rating) => {
     const maxStar = 5;
-    const getStar = Math.round(ratingStar);
+    const getStar = Math.round(rating);
     const starArray = [];
 
     for (let i = 1; i <= maxStar; i++) {
