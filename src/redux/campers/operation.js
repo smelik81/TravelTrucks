@@ -8,9 +8,13 @@ export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
   async (filters = {}, thunkAPI) => {
     try {
-      const response = await axios.get("/campers", {
-        params: filters,
-      });
+      const response = await axios.get(
+        "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers",
+        {
+          params: filters,
+          withCredentials: true,
+        }
+      );
       console.log(response.data);
 
       return response.data.items;
