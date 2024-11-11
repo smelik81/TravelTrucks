@@ -4,6 +4,7 @@ import { fetchCampers, fetchCampersDetails } from "./operation.js";
 const initialState = {
   campers: [],
   camperDetails: null,
+  //filters: {},
   filters: {
     location: "", // Текстове поле для локації
     bodyType: "", // Тип кузова, один варіант
