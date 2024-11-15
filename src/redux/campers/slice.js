@@ -2,24 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchCampers, fetchCampersDetails } from "./operation.js";
 
 const initialState = {
+  totalCampers: null,
   campers: [],
   camperDetails: null,
   //filters: {},
-  filters: {
-    location: "", // Текстове поле для локації
-    bodyType: "", // Тип кузова, один варіант
-    amenities: {
-      AC: false,
-      kitchen: false,
-      bathroom: false,
-      TV: false,
-      radio: false,
-      refrigerator: false,
-      microwave: false,
-      gas: false,
-      water: false,
-    }, // Об'єкт для декількох критеріїв
-  },
   favorites: JSON.parse(localStorage.getItem("favorites")) || [],
   status: "idle",
   camperDetailsStatus: "idle",
@@ -29,7 +15,7 @@ const initialState = {
 const campersSlice = createSlice({
   name: "campers",
   initialState,
-  reducers: {
+  /* reducers: {
     setFilters(state, action) {
       state.filters = {
         ...state.filters,
@@ -45,16 +31,18 @@ const campersSlice = createSlice({
       }
       localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },
-  },
+  }, */
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampers.pending, (state) => {
         state.status = "loading";
         state.campers = [];
+        state.totalCampers = null;
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.campers = action.payload;
+        state.campers = action.payload.items;
+        state.totalCampers = action.payload.total;
       })
       .addCase(fetchCampers.rejected, (state) => {
         state.status = "failed";

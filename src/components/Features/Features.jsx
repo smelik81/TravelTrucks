@@ -2,9 +2,11 @@ import css from "./Features.module.css";
 import Icon from "../../../public/Icon/Icon.jsx";
 import { categories } from "../../data/vehicleEquipment.js";
 
-const capitalizeFirstLetter = (string) => {
-  if (!string) return "";
-  return string.charAt(0).toUpperCase() + string.slice(1);
+const capitalizeFirstLetter = (str) => {
+  if (typeof str !== "string") {
+    return "";
+  }
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 const Features = ({ features }) => {

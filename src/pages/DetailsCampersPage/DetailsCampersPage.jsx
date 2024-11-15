@@ -36,6 +36,8 @@ const DetailsCampersPage = () => {
     return <p>Loading camper details...</p>;
   }
 
+  console.log(camperDetail);
+
   return (
     <div className={css.detailsPageContainer}>
       <div className={css.container}>

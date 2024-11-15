@@ -16,8 +16,9 @@ const CatalogPage = () => {
   const dispatch = useDispatch();
   const campers = useSelector(selectCampers);
   const status = useSelector(selectCampersStatus);
-  const filters = useSelector(selectFilters);
+  //const filters = useSelector(selectFilters);
 
+  const [filters, setFilters] = useState({});
   const [showTrailerCard, setShowTrailerCard] = useState(4);
 
   useEffect(() => {
@@ -25,8 +26,10 @@ const CatalogPage = () => {
     dispatch(fetchCampers(filters));
   }, [dispatch, filters]);
 
-  const handleFilterChange = (newFilters) => {
-    dispatch(setFilters(newFilters));
+  const handleFilterChange = (filters) => {
+    console.log("Передані фільтри:", filters);
+    dispatch(setFilters(filters));
+    //dispatch(fetchCampers(filters));
   };
 
   const handleLoadMore = () => {
@@ -37,10 +40,11 @@ const CatalogPage = () => {
     <div className={css.mainContainer}>
       <div className={css.filterContainer}>
         <FilterSideBar
-          filters={filters}
           setFilters={handleFilterChange}
+          /*filters={filters}
+          onSubmitForm={handleFilterChange}
           onFilterChange={handleFilterChange}
-          onSearchClick={() => setIsSearchClicked(true)}
+          onSearchClick={() => setIsSearchClicked(true)} */
         />
       </div>
       <div className={css.pageContainer}>

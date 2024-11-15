@@ -1,38 +1,45 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//const BASE_URL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
-axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
+const BASE_URL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers";
+//axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
+
+const formatFilters = (filters) => {
+  const params = {};
+
+  for (const [key, value] of Object.entries(filters)) {
+    if (value === "" || value === null || value === undefined) continue;
+
+    if (key === "vehicleType" && value) {
+      params["vehicleType"] = value;
+    }
+
+    if (key === "transmission") {
+      params[key] = "automatic";
+    } else if (Array.isArray(value)) {
+      value.forEach((item) => {
+        params[item] = true;
+      });
+    } else {
+      params[key] = value;
+    }
+  }
+
+  return params;
+};
 
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
   async (filters = {}, thunkAPI) => {
     try {
-      const formatFilters = (filters) => {
-        const params = {};
-        for (const [key, value] of Object.entries(filters)) {
-          // Пропускаємо порожні значення
-          if (value === "" || value === null || value === undefined) continue;
-
-          // Якщо value — це об'єкт, розгортаємо його
-          if (typeof value === "object" && value !== null) {
-            for (const [subKey, subValue] of Object.entries(value)) {
-              if (subValue) params[subKey] = subValue; // Додаємо тільки істинні значення
-            }
-          } else {
-            params[key] = value;
-          }
-        }
-        return params;
-      };
+      console.log("Початок фетчу campers");
       const formattedFilters = formatFilters(filters);
+      console.log("Форматовані фільтри:", formattedFilters);
 
-      const response = await axios.get("/campers", {
+      const response = await axios.get(BASE_URL, {
         params: formattedFilters,
       });
-      console.log(response.data);
-
-      return response.data.items;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -46,7 +53,6 @@ export const fetchCampersDetails = createAsyncThunk(
       const response = await axios.get(`/campers/${id}`);
       return response.data;
     } catch (error) {
-      console.error("Помилка під час запиту:", error);
       return rejectWithValue(error.message);
     }
   }

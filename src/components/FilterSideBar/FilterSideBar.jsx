@@ -5,6 +5,7 @@ import { vehicleTypes } from "../../data/vehicleType.js";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Icon from "../../../public/Icon/Icon.jsx";
+import { useDispatch } from "react-redux";
 
 const ValidationLocationSchema = Yup.object().shape({
   location: Yup.string()
@@ -16,13 +17,12 @@ const ValidationLocationSchema = Yup.object().shape({
     .max(20, "Location name cannot exceed 20 characters."),
 });
 
-const FilterSideBar = ({
-  filters,
-  setFilters,
-  onFilterChange,
-  onSearchClick,
-}) => {
-  const [elementFilters, setElementFilters] = useState({});
+const FilterSideBar = ({ setFilters }) => {
+  const [elementFilters, setElementFilters] = useState([]);
+  const [location, setLocation] = useState("");
+  const [vehicleType, setVehicleType] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const dispatch = useDispatch();
 
   const basicFiltersElement = [
     "AC",
@@ -32,57 +32,45 @@ const FilterSideBar = ({
     "bathroom",
   ];
 
-  useEffect(() => {
-    setElementFilters(filters);
-  }, [filters]);
-
-  const handleCategoryClick = useCallback(
-    (categoryName) => {
-      if (!basicFiltersElement.includes(categoryName)) return;
-      let newFilters = { ...elementFilters };
-      console.log(newFilters);
-      newFilters[categoryName] = !elementFilters[categoryName];
-      setElementFilters(newFilters);
-    },
-    [elementFilters, basicFiltersElement]
-  );
-
-  const handleVehicleTypeClick = useCallback(
+  const handleVehicleTypeSelect = useCallback(
     (vehicleTypeName) => {
-      let newFilters = { ...elementFilters };
-      console.log(newFilters);
-
-      newFilters.form =
-        newFilters.form === vehicleTypeName ? null : vehicleTypeName;
-      setElementFilters(newFilters);
+      setElementFilters((prevFilters) => {
+        const newFilters = { ...prevFilters };
+        newFilters.form =
+          newFilters.form === vehicleTypeName ? "" : vehicleTypeName;
+        return newFilters;
+      });
     },
-    [elementFilters]
+    [setElementFilters]
   );
 
-  const handleSearch = async (values, { setSubmitting }) => {
-    //const trimmedLocation = values.location.trim();
+  const handleLocationChange = (event) => {
+    const newLocation = event.target.value.trim();
+    setLocation(newLocation ? newLocation : "");
+  };
 
-    const updatedFilters = {
-      ...elementFilters,
-      //location: trimmedLocation,
-    };
-
-    setFilters(updatedFilters);
-    onFilterChange(updatedFilters);
-    onSearchClick();
-    setSubmitting(false);
+  const handleElementSelect = (categoryName) => {
+    setElementFilters((prev) => ({
+      ...prev,
+      [categoryName]: !prev[categoryName],
+    }));
   };
 
   return (
     <Formik
       initialValues={{
-        /* location: localFilters.location || "", */
         location: "",
       }}
       validationSchema={ValidationLocationSchema}
-      onSubmit={handleSearch}
+      onSubmit={(values) => {
+        const formattedFilters = {
+          ...elementFilters,
+          location: values.location,
+        };
+        setFilters(formattedFilters);
+      }}
     >
-      {({ isSubmitting }) => (
+      {({ values, handleChange }) => (
         <Form className={css.form}>
           <div className={css.inputContainer}>
             <label className={css.inputLabel}>Location</label>
@@ -98,6 +86,8 @@ const FilterSideBar = ({
                 type="text"
                 placeholder="City"
                 className={css.inputField}
+                onChange={handleChange}
+                value={values.location}
               />
             </div>
             <ErrorMessage
@@ -120,11 +110,10 @@ const FilterSideBar = ({
                 .map((category) => (
                   <div
                     key={category.name}
-                    className={css.category}
-                    /*  className={`${css.category} ${
+                    className={`${css.category} ${
                       elementFilters[category.name] ? css.active : ""
-                    }`} */
-                    onClick={() => handleCategoryClick(category.name)}
+                    }`}
+                    onClick={() => handleElementSelect(category.name)}
                   >
                     <Icon name={category.icon} />
                     <span>{category.label}</span>
@@ -141,11 +130,12 @@ const FilterSideBar = ({
               {vehicleTypes.map((type) => (
                 <div
                   key={type.name}
-                  className={css.category}
-                  /*  className={`${css.category} ${
-                    localFilters.form === type.name ? css.active : ""
-                  }`} */
-                  onClick={() => handleVehicleTypeClick(type.name)}
+                  className={`${css.category} ${
+                    elementFilters.form === type.name ? css.active : ""
+                  }`}
+                  onClick={() => {
+                    handleVehicleTypeSelect(type.name);
+                  }}
                 >
                   <Icon name={type.icon} />
                   <span>{type.label}</span>
@@ -157,9 +147,10 @@ const FilterSideBar = ({
           <button
             type="submit"
             className={css.searchBtn}
-            /*  disabled={!isValid || isSubmitting} */
+            //disabled={!isValid || isSearching || isSubmitting}
+            disabled={isSearching}
           >
-            {isSubmitting ? "Searching..." : "Search"}
+            {isSearching ? "Searching..." : "Search"}
           </button>
         </Form>
       )}
