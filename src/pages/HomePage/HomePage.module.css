@@ -40,12 +40,13 @@
   display: inline-block;
   color: #ffffff;
   width: 173px;
-  padding: 16px 47px;
+  padding: 16px 40px;
   font-size: 16px;
   font-weight: 500;
-  line-height: 0.66;
+  line-height: 1.5;
   background-color: #e44848;
   border-radius: 200px;
+  text-align: center;
 }
 
 .link:hover,

@@ -53,6 +53,9 @@
 span {
   padding: 4px 0;
 }
+.likeIcon.active {
+  color: yellow;
+}
 
 .details {
   margin-top: 8px;

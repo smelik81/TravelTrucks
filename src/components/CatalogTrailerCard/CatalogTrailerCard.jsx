@@ -9,6 +9,8 @@ import { toggleFavorite } from "../../redux/campers/slice.js";
 const CatalogTrailerCard = ({ camper }) => {
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
+  console.log(favorites);
+
   const isSelected = favorites.includes(camper.id);
 
   const mainAttributes = ["transmission", "engine", "kitchen", "AC"];
@@ -21,8 +23,6 @@ const CatalogTrailerCard = ({ camper }) => {
       label: category.label,
     }));
   const handleFavoriteClick = () => {
-    console.log("toggle favorites", camper.id);
-
     dispatch(toggleFavorite(camper.id));
   };
 

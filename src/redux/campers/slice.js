@@ -15,13 +15,7 @@ const initialState = {
 const campersSlice = createSlice({
   name: "campers",
   initialState,
-  /* reducers: {
-    setFilters(state, action) {
-      state.filters = {
-        ...state.filters,
-        ...action.payload,
-      };
-    },
+  reducers: {
     toggleFavorite(state, action) {
       const camperId = action.payload;
       if (state.favorites.includes(camperId)) {
@@ -31,7 +25,7 @@ const campersSlice = createSlice({
       }
       localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },
-  }, */
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampers.pending, (state) => {

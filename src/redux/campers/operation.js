@@ -32,9 +32,7 @@ export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
   async (filters = {}, thunkAPI) => {
     try {
-      console.log("Початок фетчу campers");
       const formattedFilters = formatFilters(filters);
-      console.log("Форматовані фільтри:", formattedFilters);
 
       const response = await axios.get(BASE_URL, {
         params: formattedFilters,
@@ -50,7 +48,8 @@ export const fetchCampersDetails = createAsyncThunk(
   "campers/fetchCamperDetails",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/campers/${id}`);
+      const response = await axios.get(`${BASE_URL}/${id}`);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
